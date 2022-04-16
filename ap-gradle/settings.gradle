@@ -1,0 +1,5 @@
+rootProject.name = 'ap-gradle'
+
+include(':annotations',
+        ':other-module'
+)
