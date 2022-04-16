@@ -10,6 +10,14 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":annotations"))
+    annotationProcessor(project(":annotations"))
+}
+
+tasks.withType(JavaCompile) {
+    configure(options) {
+        options.compilerArgs << '-XprintProcessorInfo' << '-XprintRounds'
+    }
 }
 
 test {
