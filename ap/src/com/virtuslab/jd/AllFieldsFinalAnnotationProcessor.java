@@ -18,7 +18,7 @@ import static javax.lang.model.element.Modifier.FINAL;
 import static javax.tools.Diagnostic.Kind.ERROR;
 import static javax.tools.Diagnostic.Kind.NOTE;
 
-@SupportedAnnotationTypes("com.virtuslab.*")
+@SupportedAnnotationTypes("com.virtuslab.jd.AllFieldsFinal")
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 public class AllFieldsFinalAnnotationProcessor extends AbstractProcessor {
 
@@ -41,16 +41,13 @@ public class AllFieldsFinalAnnotationProcessor extends AbstractProcessor {
     }
 
     private void handleNotFinals(Element element) {
-        var nonFinalFields = fields(element).stream()
+        var nonFinalFields = ElementFilter.fieldsIn(element.getEnclosedElements())
+                .stream()
                 .filter(this::isNotFinal)
                 .toList();
         if (!nonFinalFields.isEmpty()) {
             raiseError(element, nonFinalFields);
         }
-    }
-
-    private List<? extends VariableElement> fields(Element element) {
-        return ElementFilter.fieldsIn(element.getEnclosedElements());
     }
 
     private boolean isNotFinal(Element element) {
