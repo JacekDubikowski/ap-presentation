@@ -1,6 +1,5 @@
 package com.virtuslab.jd;
 
-import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
@@ -18,6 +17,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.ElementFilter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -74,7 +74,7 @@ public class WithRunnerProcessor extends AbstractProcessor {
     }
 
     private Name packageName(Element element) {
-        while(element.getEnclosingElement().getKind() != ElementKind.PACKAGE) {
+        while (element.getEnclosingElement().getKind() != ElementKind.PACKAGE) {
             element = element.getEnclosingElement();
         }
         var packageElement = (PackageElement) element.getEnclosingElement();
@@ -82,9 +82,8 @@ public class WithRunnerProcessor extends AbstractProcessor {
     }
 
     private List<ExecutableElement> getPublicConstructors(Element element) {
-        return  element.getEnclosedElements().stream()
-                .filter(it -> it.getKind() == ElementKind.CONSTRUCTOR && it.getModifiers().contains(Modifier.PUBLIC))
-                .map(it -> (ExecutableElement) it)
+        return ElementFilter.constructorsIn(element.getEnclosedElements()).stream()
+                .filter(it -> it.getModifiers().contains(Modifier.PUBLIC))
                 .toList();
     }
 

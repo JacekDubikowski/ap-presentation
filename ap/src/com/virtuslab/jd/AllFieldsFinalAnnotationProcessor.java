@@ -8,9 +8,9 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-import javax.tools.Diagnostic;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.util.ElementFilter;
 import java.io.CharArrayWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -49,8 +49,8 @@ public class AllFieldsFinalAnnotationProcessor extends AbstractProcessor {
         }
     }
 
-    private List<? extends Element> fields(Element element) {
-        return element.getEnclosedElements().stream().filter(innerElement -> innerElement.getKind().isField()).toList();
+    private List<? extends VariableElement> fields(Element element) {
+        return ElementFilter.fieldsIn(element.getEnclosedElements());
     }
 
     private boolean isNotFinal(Element element) {
