@@ -40,19 +40,19 @@ public class GenerateFileAnnotationProcessor extends AbstractProcessor {
     }
 
     private void writeTextFile() throws IOException {
-        FileObject resource = processingEnv.getFiler().createResource(SOURCE_OUTPUT, "GDGPoznan", "Hello-World.txt");
+        FileObject resource = processingEnv.getFiler().createResource(SOURCE_OUTPUT, "KielceJug", "Hello-World.txt");
         try (var writer = resource.openWriter()) {
             writer.append("Hello from file");
         }
     }
 
     private void writeJavaFile() throws IOException {
-        FileObject resource = processingEnv.getFiler().createSourceFile("com.virtuslab.jd.GDGPoznan");
+        FileObject resource = processingEnv.getFiler().createSourceFile("com.virtuslab.jd.KielceJug");
         try (var writer = resource.openWriter()) {
             writer.append("""
                     package com.virtuslab.jd;
                                         
-                    public class GDGPoznan {
+                    public class KielceJug {
                         public static void main(String[] args) {
                             System.out.println("Hello world!");
                         }

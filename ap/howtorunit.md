@@ -11,8 +11,8 @@ javac -source 17 -target 17 -XprintProcessorInfo -XprintRounds com/virtuslab/jd/
 ```shell
 cleanup () {
   rm **/*.class 
-  rm **/GDGPoznan.java
-  rm -r **/GDGPoznan/
+  rm **/KielceJug.java
+  rm -r **/KielceJug/
 }
 
 compile_processors () {
