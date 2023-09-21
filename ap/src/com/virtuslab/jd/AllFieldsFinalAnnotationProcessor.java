@@ -14,23 +14,13 @@ import static javax.tools.Diagnostic.Kind.ERROR;
 import static javax.tools.Diagnostic.Kind.NOTE;
 
 @SupportedAnnotationTypes("com.virtuslab.jd.AllFieldsFinal")
-@SupportedSourceVersion(SourceVersion.RELEASE_17)
+@SupportedSourceVersion(SourceVersion.RELEASE_21)
 public class AllFieldsFinalAnnotationProcessor extends AbstractProcessor {
-    private int roundCounter = 1;
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        processingEnv.getMessager()
-                .printMessage(NOTE, "Running processor: %s. Round number: %s. Error raised: %s".formatted(
-                        this.getClass().getSimpleName(),
-                        roundCounter,
-                        roundEnv.errorRaised())
-                );
-
         var annotateTypedElements = ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(AllFieldsFinal.class));
         annotateTypedElements.forEach(this::checkType);
-
-        roundCounter++;
         return true;
     }
 

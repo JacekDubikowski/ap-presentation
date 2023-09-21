@@ -15,7 +15,7 @@ import static javax.tools.Diagnostic.Kind.NOTE;
 import static javax.tools.StandardLocation.SOURCE_OUTPUT;
 
 @SupportedAnnotationTypes("com.virtuslab.jd.AllFieldsFinal")
-@SupportedSourceVersion(SourceVersion.RELEASE_17)
+@SupportedSourceVersion(SourceVersion.RELEASE_21)
 public class GenerateFileAnnotationProcessor extends AbstractProcessor {
     private boolean processed = false;
 
@@ -40,19 +40,19 @@ public class GenerateFileAnnotationProcessor extends AbstractProcessor {
     }
 
     private void writeTextFile() throws IOException {
-        FileObject resource = processingEnv.getFiler().createResource(SOURCE_OUTPUT, "KielceJug", "Hello-World.txt");
+        FileObject resource = processingEnv.getFiler().createResource(SOURCE_OUTPUT, "FourDevelopers", "Hello-World.txt");
         try (var writer = resource.openWriter()) {
             writer.append("Hello from file");
         }
     }
 
     private void writeJavaFile() throws IOException {
-        FileObject resource = processingEnv.getFiler().createSourceFile("com.virtuslab.jd.KielceJug");
+        FileObject resource = processingEnv.getFiler().createSourceFile("com.virtuslab.jd.SourceFourDevelopers");
         try (var writer = resource.openWriter()) {
             writer.append("""
                     package com.virtuslab.jd;
                                         
-                    public class KielceJug {
+                    public class SourceFourDevelopers {
                         public static void main(String[] args) {
                             System.out.println("Hello world!");
                         }
@@ -62,7 +62,7 @@ public class GenerateFileAnnotationProcessor extends AbstractProcessor {
     }
 
     private void writeClassFile() throws IOException {
-        FileObject resource = processingEnv.getFiler().createClassFile("com.virtuslab.jd.GDGPoznanClass");
+        FileObject resource = processingEnv.getFiler().createClassFile("com.virtuslab.jd.FourDevelopers");
         try (var output = resource.openOutputStream()) {
             for (var hexCode : getClassContent()) {
                 output.write(hexCode);
@@ -319,19 +319,19 @@ public class GenerateFileAnnotationProcessor extends AbstractProcessor {
                 (int) 'j',
                 (int) 'd',
                 (int) '/',
-                (int) 'G',
-                (int) 'D',
-                (int) 'G',
-                (int) 'P',
+                (int) 'F',
                 (int) 'o',
-                (int) 'z',
-                (int) 'n',
-                (int) 'a',
-                (int) 'n',
-                (int) 'C',
+                (int) 'u',
+                (int) 'r',
+                (int) 'D',
+                (int) 'e',
+                (int) 'v',
+                (int) 'e',
                 (int) 'l',
-                (int) 'a',
-                (int) 's',
+                (int) 'o',
+                (int) 'p',
+                (int) 'e',
+                (int) 'r',
                 (int) 's',
                 (int) 0x01,
                 (int) 0x00,
